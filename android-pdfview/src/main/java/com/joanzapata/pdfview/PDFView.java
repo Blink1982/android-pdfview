@@ -193,6 +193,9 @@ public class PDFView extends SurfaceView {
         dragPinchManager = new DragPinchManager(this);
 
         paint = new Paint();
+        paint.setAntiAlias(true);
+        paint.setFilterBitmap(true);
+        paint.setDither(true);
         debugPaint = new Paint();
         debugPaint.setStyle(Style.STROKE);
         paintMinimapBack = new Paint();
@@ -203,6 +206,7 @@ public class PDFView extends SurfaceView {
         paintMinimapFront.setStyle(Style.FILL);
         paintMinimapFront.setColor(Color.BLACK);
         paintMinimapFront.setAlpha(50);
+
 
         // A surface view does not call
         // onDraw() as a default but we need it.
@@ -559,7 +563,7 @@ public class PDFView extends SurfaceView {
         float middleOfScreenY = (-currentYOffset + getHeight() / 2);
         float middleOfScreenPageX;
         float middleOfScreenPageY;
-        if (swipeVertical) {
+        if (!swipeVertical) {
         	middleOfScreenPageX = middleOfScreenX - userPage * toCurrentScale(optimalPageWidth);
         	middleOfScreenPageY = middleOfScreenY;
         } else {
